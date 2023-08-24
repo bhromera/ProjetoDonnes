@@ -1,0 +1,43 @@
+<div class="container mt-5">
+  <div class="text-center mb-2">
+    <h1>Avaliação</h1>
+    <h5>Em uma escala de 0 a 10, qual a probabilidade de você recomendar nosso produto/serviço a um amigo/conhecido?</h5>
+  </div>
+
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-6">
+      <div class="card px-5 py-5" id="form1">
+        <div class="form-data" v-if="!submitted">
+          <div class="forms-inputs mb-4 text-center d-flex flex-column">
+            <span>Data da avaliação</span>
+            <input type="date" id="data" name="data" [(ngModel)]="data" required>
+          </div>
+          <div class="forms-inputs mb-4 text-center d-flex flex-column">
+            <span>Selecione os clientes</span>
+            <select multiple [(ngModel)]="clientesSelecionados" (ngModelChange)="onClientesSelecionados()"
+            class="form-select"  aria-label="Multiple select example">
+              <option selected>Selecione os clientes</option>
+              <option *ngFor="let cliente of this.clientes" value="{{ cliente.Id }}"> {{cliente.RazaoSocial}} </option>
+            </select>
+          </div>
+          <div class="forms-inputs mb-4 text-center d-flex flex-column">
+            <span>Nota</span>
+            <input type="number" id="nota" name="nota" [(ngModel)]="nota" required>
+          </div>
+          <div class="forms-inputs mb-4 text-center d-flex flex-column">
+            <span>Motivo</span>
+            <input type="text" id="motivo" name="motivo" [(ngModel)]="motivo" required>
+          </div>
+
+          <div *ngIf="erroSalvar" class="alert alert-danger">Não foi possível cadastrar a avaliação, tente novamente.</div>
+          <div *ngIf="sucesso" class="alert alert-success">Salvo com sucesso.</div>
+
+          <div class="mb-3">
+          <button class="btn btn-dark w-100" (click)="salvar()">Salvar</button>
+          <button class="btn btn-light w-100 mt-1" (click)="voltar()">Voltar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
